@@ -19,6 +19,21 @@ TARGET_KERNEL_CONFIG := custom_find7_defconfig
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3
 BOARD_CUSTOM_BOOTIMG_MK := device/oppo/find7-common/mkbootimg.mk
 
+# Ramdisk
+PRODUCT_PACKAGES += \
+    libinit_find7 \
+    init.qcom.usb.rc
+
+ifneq ($(STOCK_LAYOUT),false)
+PRODUCT_PACKAGES += \
+    init.qcom.find7u
+endif
+
+ifneq ($(STOCK_LAYOUT),true)
+PRODUCT_PACKAGES += \
+    init.qcom.find7
+endif
+
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/oppo/find7-common/bluetooth
 
