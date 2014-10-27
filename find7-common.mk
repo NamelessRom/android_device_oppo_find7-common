@@ -20,12 +20,6 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 # do not build dsp manager
 USE_DSP_MANAGER := false
 
-# Ramdisk
-PRODUCT_PACKAGES += \
-    libinit_find7 \
-    init.qcom.rc \
-    init.qcom.usb.rc
-
 # Audio
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
