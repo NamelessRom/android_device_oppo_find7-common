@@ -23,8 +23,15 @@ USE_DSP_MANAGER := false
 # Ramdisk
 PRODUCT_PACKAGES += \
     libinit_find7 \
-    init.qcom.rc \
     init.qcom.usb.rc
+
+ifneq ($(STOCK_LAYOUT),false)
+PRODUCT_PACKAGES += \
+    init.qcom.find7u
+else
+PRODUCT_PACKAGES += \
+    init.qcom.find7
+endif
 
 # Audio
 PRODUCT_COPY_FILES += \
