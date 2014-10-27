@@ -31,3 +31,5 @@ RECOVERY_VARIANT      := philz
 
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := device/oppo/find7-common
+
+TARGET_INIT_VENDOR_LIB := libinit_find7
