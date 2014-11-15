@@ -20,10 +20,6 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 # do not build dsp manager
 USE_DSP_MANAGER := false
 
-# temporary solution
-PRODUCT_PROPERTY_OVERRIDES += \
-    config.disable_atlas=true
-
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.qcom \
