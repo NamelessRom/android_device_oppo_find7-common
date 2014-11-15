@@ -24,13 +24,14 @@ on fs
 on init
     # See storage config details at http://source.android.com/tech/storage/
     chmod 0701 /mnt/media_rw
-    mkdir /mnt/media_rw/sdcard0 0775 system system
-    mkdir /mnt/media_rw/sdcard1 0775 system system
-    mkdir /mnt/media_rw/usbdisk 0775 system system
+    mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
+    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+    mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
 
-    mkdir /storage/sdcard0 0000 system system
-    mkdir /storage/sdcard1 0000 system system
-    mkdir /storage/usbdisk 0000 system system
+    mkdir /storage 0550 system sdcard_r
+    mkdir /storage/sdcard0 0700 root root
+    mkdir /storage/sdcard1 0700 root root
+    mkdir /storage/usbdisk 0700 root root
 
     export EXTERNAL_STORAGE /storage/sdcard0
     export SECONDARY_STORAGE /storage/sdcard1:/storage/usbdisk
@@ -72,4 +73,3 @@ service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/sdcard1 /s
 service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/usbdisk /storage/usbdisk
     class late_start
     disabled
-
