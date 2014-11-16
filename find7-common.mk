@@ -44,6 +44,14 @@ PRODUCT_PACKAGES += \
     Tag \
     com.android.nfc_extras
 
+# Wlan
+PRODUCT_PACKAGES += \
+     libwpa_client \
+     hostapd \
+     dhcpcd.conf \
+     wpa_supplicant \
+     wpa_supplicant.conf
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/base/nfc-extras/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
