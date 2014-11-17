@@ -16,6 +16,9 @@
 """Custom OTA commands for oppo_msm8974 devices"""
 
 def FullOTA_InstallEnd(info):
-    info.script.AppendExtra('ui_print("{x}...Flashing Nameless Logo Image...");')
+    if info.block_based:
+        info.common.ZipWriteStr(info.output_zip, "system/logo.bin",
+                       "" + info.input_zip.read("SYSTEM/logo.bin"))
+    info.script.AppendExtra('ui_print("{x} Flashing Nameless Logo Image");')
     info.script.AppendExtra('package_extract_file("system/logo.bin", "/dev/block/platform/msm_sdcc.1/by-name/LOGO");')
     info.script.AppendExtra('delete("/system/logo.bin");')
