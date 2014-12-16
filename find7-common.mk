@@ -23,6 +23,17 @@ PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.qcom.usb.rc \
 
+# Recovery
+ifeq ($(filter $(TARGET_DEVICE),find7au find7u),)
+  PRODUCT_COPY_FILES += $(LOCAL_PATH)/rootdir/recovery/twrp.fstab.std:recovery/root/etc/twrp.fstab
+else
+  PRODUCT_COPY_FILES += $(LOCAL_PATH)/rootdir/recovery/twrp.fstab.ufd:recovery/root/etc/twrp.fstab
+endif
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/recovery/init.recovery.find7.rc:recovery/root/init.recovery.find7.rc \
+    $(LOCAL_PATH)/rootdir/recovery/qhdcp.sh:recovery/root/sbin/qhdcp.sh \
+
 # Audio
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
