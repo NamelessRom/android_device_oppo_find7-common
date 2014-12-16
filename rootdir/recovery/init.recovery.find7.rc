@@ -1,0 +1,39 @@
+on early-init
+# detect if volume is standard or unified
+    wait /dev/block/platform/msm_sdcc.1/by-name/userdata
+    wait /dev/block/platform/msm_sdcc.1/by-name/sdcard
+    start awesome_init
+
+service awesome_init /sbin/awesome_init_recovery.sh
+    oneshot
+    disabled
+
+#These are used to handle find7a vs. find7s
+#and used to be in init.recovery.rc in device/oppo/msm8974-common
+
+service qhdcp /sbin/qhdcp.sh
+    oneshot
+    disabled
+
+service use_standard_fstab /sbin/use_standard_fstab.sh
+    oneshot
+    disabled
+
+service use_unified_fstab /sbin/use_unified_fstab.sh
+    oneshot
+    disabled
+
+on property:ro.oppo.device=find7s
+    start qhdcp
+
+on property:ro.product.device=find7
+    start use_standard_fstab
+
+on property:ro.product.device=find7a
+    start use_standard_fstab
+
+on property:ro.product.device=find7u
+    start use_unified_fstab
+
+on property:ro.product.device=find7au
+    start use_unified_fstab
