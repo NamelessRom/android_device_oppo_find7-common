@@ -28,6 +28,10 @@
  */
 
 #include <stdlib.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <sys/ioctl.h>
+#include <linux/fs.h>
 
 #include "vendor_init.h"
 #include "property_service.h"
@@ -55,7 +59,38 @@ static void import_kernel_nv(char *name, int for_emulator)
     }
 }
 
+static bool has_unified_layout() {
+    uint64_t size=0;
+    const char* datadevice="/dev/block/mmcblk0p15";
+
+    int fd=open(datadevice, O_RDONLY);
+    if (fd < 0 ) {
+        // fprintf(stderr, "could not open %s for reading: %s\n", datadevice, strerror(errno));
+        return false;
+    }
+    if (ioctl(fd, BLKGETSIZE64, &size) < 0) {
+        // fprintf(stderr, "could not determine size of %s: %s\n", datadevice, strerror(errno));
+        close(fd);
+        return false;
+    }
+    close(fd);
+    if (size > 4*(10^9)) { // if the data partition is larger than 4GB we probably have Coldbird's unified layout
+        return true;
+    }
+    return false;
+}
+
+static void set_oppo_layout()
+{
+    if (has_unified_layout()) {
+        property_set("ro.oppo.layout", "unified");
+    } else {
+        property_set("ro.oppo.layout", "standard");
+    }
+}
+
 void vendor_load_properties()
 {
     import_kernel_cmdline(0, import_kernel_nv);
+    set_oppo_layout();
 }
