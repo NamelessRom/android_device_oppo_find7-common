@@ -30,7 +30,7 @@ PRODUCT_PACKAGES += \
 # Recovery
 PRODUCT_PACKAGES += \
     twrp.fstab \
-    init.recovery.find7.rc \
+    init.recovery.target.rc \
     qhdcp.sh \
 
 # Audio
