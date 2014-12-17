@@ -75,10 +75,10 @@ endif
 
 # init
 include $(CLEAR_VARS)
-LOCAL_MODULE       := init.recovery.find7.rc
+LOCAL_MODULE       := init.recovery.target.rc
 LOCAL_MODULE_TAGS  := optional eng
 LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
-LOCAL_SRC_FILES    := recovery/init.recovery.find7.rc
+LOCAL_SRC_FILES    := recovery/init.recovery.target.rc
 LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
 
