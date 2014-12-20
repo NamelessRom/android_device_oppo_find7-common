@@ -24,9 +24,14 @@ PRODUCT_PACKAGES += \
 
 # Ramdisk
 PRODUCT_PACKAGES += \
-    fstab.qcom \
+    fstab.qcom.std \
+    fstab.qcom.ufd \
+    init.fs.rc.std \
+    init.fs.rc.ufd \
     init.qcom.rc \
     init.qcom.usb.rc \
+    storage_earlyinit.sh \
+    storage_init.sh
 
 # Audio
 PRODUCT_COPY_FILES += \
