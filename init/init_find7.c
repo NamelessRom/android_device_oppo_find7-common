@@ -94,8 +94,27 @@ static void set_oppo_layout()
     }
 }
 
+static void set_product_device()
+{
+    char layout[PROP_VALUE_MAX];
+    char product_device[PROP_VALUE_MAX];
+
+    if(property_get("ro.oppo.device", product_device) > 0
+       && property_get("ro.oppo.layout", layout) > 0) {
+        if(strcmp(layout, "unified") == 0) {
+            strcat(product_device, "u");
+        }
+    } else {
+        ERROR("could not determine product device, using default: find7");
+        strcpy(product_device, "find7");
+    }
+
+    property_set("ro.product.device", product_device);
+}
+
 void vendor_load_properties()
 {
     import_kernel_cmdline(0, import_kernel_nv);
     set_oppo_layout();
+    set_product_device();
 }
