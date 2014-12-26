@@ -21,6 +21,9 @@ include device/oppo/msm8974-common/BoardConfigCommon.mk
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_find7
 
+# Disable block based OTA
+BLOCK_BASED_OTA := false
+
 # Filesystem
 BOARD_BOOTIMAGE_PARTITION_SIZE     := 16777216
 BOARD_CACHEIMAGE_PARTITION_SIZE    := 536870912
