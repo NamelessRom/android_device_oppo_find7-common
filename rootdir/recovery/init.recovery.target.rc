@@ -21,5 +21,8 @@ on property:ro.oppo.device=find7a
 on property:ro.oppo.layout=unified
    symlink /etc/twrp.fstab.ufd /etc/twrp.fstab
 
+on property:ro.oppo.layout=lvm
+   symlink /etc/twrp.fstab.lvm /etc/twrp.fstab
+
 on property:ro.oppo.layout=standard
    symlink /etc/twrp.fstab.std /etc/twrp.fstab
